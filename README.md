@@ -1,7 +1,5 @@
-TypeScript React "material-ui" Demo
-===================================
-
-如何使用TypeScript来写"material-ui"
+TypeScript React "material-ui" Date Picker Demo
+===============================================
 
 ```
 npm install
