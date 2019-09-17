@@ -1,7 +1,6 @@
 import React, {useState} from 'react'
 import {MuiPickersUtilsProvider, KeyboardDatePicker} from '@material-ui/pickers';
 import {IconButton, withStyles} from "@material-ui/core";
-import {createStyles} from "@material-ui/styles";
 import {MaterialUiPickersDate} from '@material-ui/pickers/typings/date';
 import DateFnsUtils from '@date-io/date-fns';
 import format from "date-fns/format";
@@ -9,21 +8,13 @@ import isValid from "date-fns/isValid";
 import isSameDay from "date-fns/isSameDay";
 import isWithinInterval from "date-fns/isWithinInterval";
 import clsx from "clsx";
-import {weekStart, weekEnd} from './utils';
+import {weekStart, weekEnd, makeJSDateObject} from './utils';
+import styles from './styles';
 
-type WeekPickerProps = {
-  classes: any
-}
-
-function makeJSDateObject(date: MaterialUiPickersDate): Date {
-  return new Date(date!.getTime());
-}
-
-function WeekPicker({classes}: WeekPickerProps) {
+function WeekPicker({classes}: { classes: any }) {
   const [selectedDate, handleDateChange] = useState<Date | null>(new Date());
 
   function handleWeekChange(date: MaterialUiPickersDate) {
-    console.debug('> handleWeekChange', date);
     if (date) {
       handleDateChange(weekStart(date));
     } else {
@@ -85,47 +76,5 @@ function WeekPicker({classes}: WeekPickerProps) {
     </MuiPickersUtilsProvider>
   </div>
 }
-
-const styles = createStyles((theme: any) => ({
-  dayWrapper: {
-    position: "relative",
-  },
-  day: {
-    width: 36,
-    height: 36,
-    fontSize: theme.typography.caption.fontSize,
-    margin: "0 2px",
-    color: "inherit",
-  },
-  customDayHighlight: {
-    position: "absolute",
-    top: 0,
-    bottom: 0,
-    left: "2px",
-    right: "2px",
-    border: `1px solid ${theme.palette.secondary.main}`,
-    borderRadius: "50%",
-  },
-  nonCurrentMonthDay: {
-    color: theme.palette.text.disabled,
-  },
-  highlightNonCurrentMonthDay: {
-    color: "#676767",
-  },
-  highlight: {
-    background: theme.palette.primary.main,
-    color: theme.palette.common.white,
-  },
-  firstHighlight: {
-    extend: "highlight",
-    borderTopLeftRadius: "50%",
-    borderBottomLeftRadius: "50%",
-  },
-  endHighlight: {
-    extend: "highlight",
-    borderTopRightRadius: "50%",
-    borderBottomRightRadius: "50%",
-  },
-}));
 
 export default withStyles(styles)(WeekPicker);
