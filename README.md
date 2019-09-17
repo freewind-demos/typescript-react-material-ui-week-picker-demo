@@ -1,4 +1,4 @@
-TypeScript React "material-ui" Date Picker Demo
+TypeScript React "material-ui" Week Picker Demo
 ===============================================
 
 ```
